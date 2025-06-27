@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     '@nuxt/test-utils',
     '@nuxt/ui',
     '@nuxtjs/i18n',
-    // '@sidebase/nuxt-auth'
+    '@nuxtjs/supabase',
   ],
 
   i18n: {
@@ -36,5 +36,15 @@ export default defineNuxtConfig({
         file: 'en.json',
       },
     ],
+  },
+
+  supabase: {
+    redirectOptions: {
+      login: '/auth',
+      callback: '/confirm',
+      include: undefined,
+      exclude: ['/'],
+      cookieRedirect: false,
+    },
   },
 })
