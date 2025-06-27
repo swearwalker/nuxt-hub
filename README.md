@@ -1,6 +1,7 @@
 # NuxtHub
 
 ## Features
+
 - Nuxt 3 with TypeScript support
 - Modular file structure
 - Basic authentication layout
@@ -23,10 +24,11 @@
    ```
 
 ## Project Structure
+
 - `src/` - Main source code
-    - `pages/` - Application pages
-    - `layouts/` - Layout components
-    - `i18n/` - Internationalization config and locales
-    - `assets/` - Static assets (CSS, images)
+  - `pages/` - Application pages
+  - `layouts/` - Layout components
+  - `i18n/` - Internationalization config and locales
+  - `assets/` - Static assets (CSS, images)
 - `nuxt.config.ts` - Nuxt configuration
 - `package.json` - Project dependencies and scripts

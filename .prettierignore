@@ -1,5 +1,5 @@
 node_modules
 .nuxt
 dist
-output
+src/output
 coverage
