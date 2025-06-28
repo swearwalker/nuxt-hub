@@ -4,7 +4,7 @@ const { t } = useI18n()
 
 <template>
   <UContainer>
-    <h1>Hi Index! {{ t('title') }}</h1>
+    <h1>Hi Profile! {{ t('title') }}</h1>
   </UContainer>
 </template>
 
