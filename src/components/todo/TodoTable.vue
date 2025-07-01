@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
-import type { TodoInterface, TodoNewInterface, TodoUpdateInterface } from '~/types/interfaces'
+import type {
+  TodoInterface,
+  TodoNewInterface,
+  TodoUpdateInterface,
+} from '@/types/interfaces/todo.interface'
 import type { Row } from '@tanstack/table-core'
 
 const UButton = resolveComponent('UButton')

@@ -16,6 +16,11 @@
   - Form validation with Zod
   - Modal-based forms for creating and editing
   - Interactive table display with action buttons
+- Real-time Chat System
+  - Socket.io integration with Supabase
+  - Real-time message updates
+  - User avatars and personalized display
+  - Composable-based architecture
 
 ## Getting Started
 
@@ -27,7 +32,11 @@
    ```bash
    npm run dev
    ```
-3. **Build for production:**
+3. **Start the Socket.io server:**
+   ```bash
+   npm run socket
+   ```
+4. **Build for production:**
    ```bash
    npm run build
    ```
@@ -42,12 +51,21 @@
       - `TodoCreateForm.vue` - Form for creating new todos
       - `TodoEditForm.vue` - Form for editing existing todos
       - `TodoTable.vue` - Table display of todo items
+    - `chat/` - Chat components
+      - `ChatBubble.vue` - Individual message display
+      - `ChatFooter.vue` - Message input interface
+  - `composables/` - Reusable logic hooks
+    - `useUserDisplay.ts` - User display formatting
+    - `useChatMessages.ts` - Chat message management
   - `i18n/` - Internationalization config and locales
   - `assets/` - Static assets (CSS, images)
-  - `server/` - Server-side API endpoints
+  - `server/` - Server-side API endpoints and Socket.io server
+    - `server-socket.ts` - Real-time chat server
     - `api/todo/` - Todo CRUD operations
   - `middleware/` - Route middleware
     - `auth.ts` - Authentication protection for routes
+  - `plugins/` - Nuxt plugins
+    - `socket.client.ts` - Socket.io client integration
 - `nuxt.config.ts` - Nuxt configuration
 - `package.json` - Project dependencies and scripts
 
@@ -92,3 +110,28 @@ The application includes a complete todo management system with the following fe
 
 ### Form Validation
 All forms use Zod schema validation to ensure data integrity before submission.
+
+## Real-time Chat
+
+The application includes a real-time chat system with Supabase integration:
+
+### Features
+- **Real-time Messaging**: Instant message delivery with Socket.io
+- **Supabase Integration**: Chat history stored in Supabase with real-time subscriptions
+- **User Identification**: Shows "You" for current user, with names and avatars for all users
+- **Message Formatting**: Properly formatted timestamps and message styling
+- **Dual Connection**: Combines Socket.io for immediate delivery with Supabase for persistence
+
+### Components
+- **ChatBubble**: Displays individual messages with user information and timestamps
+- **ChatFooter**: Input interface for sending new messages
+
+### Composables
+- **useUserDisplay**: Manages user name formatting, avatar generation, and message timestamps
+- **useChatMessages**: Handles message fetching, real-time subscriptions, and message sending
+
+### Implementation
+- Socket.io server connects to Supabase using the service role key
+- Messages are stored in the `chat` table in Supabase
+- Real-time Supabase subscriptions provide message persistence
+- Duplicate message detection prevents showing the same message twice
