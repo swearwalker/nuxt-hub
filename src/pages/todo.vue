@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import type { ApiError } from '@/types/interfaces/errors.interface'
 import type {
-  ApiError,
   TodoInterface,
   TodoNewInterface,
   TodoUpdateInterface,
-} from '~/types/interfaces'
-import TodoEditForm from '~/components/todo/TodoEditForm.vue'
-import TodoCreateForm from '~/components/todo/TodoCreateForm.vue'
+} from '@/types/interfaces/todo.interface'
+import TodoEditForm from '@/components/todo/TodoEditForm.vue'
+import TodoCreateForm from '@/components/todo/TodoCreateForm.vue'
 
 const showCreateTodoModal = ref(false)
 const showEditTodoModal = ref(false)

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { ApiError, TodoInterface, TodoUpdateInterface } from '~/types/interfaces'
+import type { ApiError } from '@/types/interfaces/errors.interface'
+import type { TodoInterface, TodoUpdateInterface } from '@/types/interfaces/todo.interface'
 import { z } from 'zod'
 
 const props = defineProps<{
