@@ -58,24 +58,27 @@ watch(
 </script>
 
 <template>
-  <UContainer class="h-full">
+  <UContainer>
     <UCard class="flex h-full w-full flex-col">
       <template #header>
-        <div class="flex items-center justify-between">
-          <h2 class="text-xl font-bold">Real-time Chat</h2>
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h2 class="text-xl font-bold">Chat</h2>
           <p v-if="user" class="text-sm text-gray-500">Logged in as {{ user.email }}</p>
         </div>
       </template>
 
       <div
         class="chat-messages flex flex-1 flex-col items-start space-y-1 overflow-y-auto p-4"
+        :class="{ 'justify-center': isLoading }"
         style="height: calc(100vh - 14rem)"
       >
-        <UProgress v-if="isLoading" class="my-2" />
-        <p v-else-if="messages.length === 0" class="my-4 text-center text-gray-500">
-          No messages yet. Be the first to say something!
-        </p>
-        <ChatBubble v-for="msg in messages" :key="msg.id" :message="msg" :user="user" />
+        <UProgress v-if="isLoading" animation="swing" />
+        <template v-else-if="!isLoading && messages.length > 0">
+          <TransitionGroup name="message">
+            <ChatBubble v-for="msg in messages" :key="msg.id" :message="msg" :user="user" />
+          </TransitionGroup>
+        </template>
+        <ChatEmpty v-else />
       </div>
 
       <template #footer>
