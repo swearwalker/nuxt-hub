@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   alias: {
     '@': '~/',
   },
-  css: ['./src/assets/css/main.css'],
+  css: ['./src/assets/css/main.css', './src/assets/css/animations.css'],
 
   modules: [
     '@nuxt/eslint',

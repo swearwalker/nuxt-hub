@@ -7,6 +7,7 @@ import type {
   TodoUpdateInterface,
 } from '@/types/interfaces/todo.interface'
 import type { Row } from '@tanstack/table-core'
+import { format } from 'date-fns'
 
 const UButton = resolveComponent('UButton')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
@@ -23,20 +24,14 @@ const emit = defineEmits<{
 const columns: TableColumn<TodoInterface>[] = [
   {
     accessorKey: 'id',
-    header: '#',
+    header: 'ID',
     cell: ({ row }) => `#${row.getValue('id')}`,
   },
   {
     accessorKey: 'created_at',
     header: 'Date',
     cell: ({ row }) => {
-      return new Date(row.getValue('created_at')).toLocaleString('en-US', {
-        day: 'numeric',
-        month: 'short',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-      })
+      return format(row.getValue('created_at'), 'dd MMM yyyy')
     },
   },
   {
@@ -147,7 +142,7 @@ function getRowItems(row?: Row<TodoInterface>) {
   <UTable
     :loading="items.length === 0"
     loading-color="primary"
-    loading-animation="carousel"
+    loading-animation="swing"
     :data="items"
     :columns="columns"
     class="flex-1"

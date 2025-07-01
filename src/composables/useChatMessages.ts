@@ -65,8 +65,12 @@ export function useChatMessages(supabase: SupabaseClient) {
   const scrollToBottom = () => {
     setTimeout(() => {
       const chatContainer = document.querySelector('.chat-messages')
+
       if (chatContainer) {
-        chatContainer.scrollTop = chatContainer.scrollHeight
+        chatContainer.scrollTo({
+          top: chatContainer.scrollHeight,
+          behavior: 'smooth',
+        })
       }
     }, 50)
   }
