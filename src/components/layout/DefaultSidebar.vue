@@ -26,14 +26,14 @@ const items = ref<NavigationMenuItem[][]>([
   ],
   [
     {
-      label: 'Dashboard',
-      icon: 'lucide:home',
-      to: '/dashboard',
-    },
-    {
       label: 'Todo',
       icon: 'lucide:list-todo',
       to: '/todo',
+    },
+    {
+      label: 'Chat',
+      icon: 'lucide:message-square',
+      to: '/chat',
     },
   ],
 ])

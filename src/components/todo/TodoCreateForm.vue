@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { ApiError, TodoNewInterface } from '~/types/interfaces'
+import type { ApiError } from '@/types/interfaces/errors.interface'
+import type { TodoNewInterface } from '@/types/interfaces/todo.interface'
 import { z } from 'zod'
 
 const emit = defineEmits<{
