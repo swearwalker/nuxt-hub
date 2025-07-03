@@ -7,6 +7,7 @@ definePageMeta({
   middleware: ['auth'],
 })
 
+const { t } = useI18n()
 const supabase = useSupabaseClient()
 
 const isNewUser = ref(false)
@@ -81,10 +82,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   <div class="flex flex-col gap-4">
     <USwitch
       v-model="isNewUser"
-      label="Auth type"
-      description="Switch auth type between sign-in and sign-up"
+      :label="t('auth.switch-label')"
+      :description="t('auth.switch-description')"
     />
-    <p>{{ isNewUser }}</p>
     <UForm
       :schema="schema"
       :state="state"
@@ -92,19 +92,19 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       @submit="onSubmit"
     >
       <h1 class="text-primary-500 text-lg font-semibold">
-        {{ isNewUser ? 'Sign Up' : 'Sign In' }}
+        {{ isNewUser ? t('auth.sign-up') : t('auth.sign-in') }}
       </h1>
-      <UFormField label="Email" name="email" class="w-full">
+      <UFormField :label="t('auth.email')" name="email" class="w-full">
         <UInput v-model="state.email" class="w-full" />
       </UFormField>
-      <UFormField label="Password" name="password" class="w-full">
+      <UFormField :label="t('auth.password')" name="password" class="w-full">
         <UInput v-model="state.password" type="password" class="w-full" />
       </UFormField>
-      <UButton type="submit"> Submit </UButton>
+      <UButton type="submit">{{ t('auth.submit') }}</UButton>
     </UForm>
     <USeparator />
     <div class="flex flex-col items-center justify-center gap-2">
-      <p class="text-sm text-neutral-500">Or sign in using social networks</p>
+      <p class="text-sm text-neutral-500">{{ t('auth.other-way-auth') }}</p>
       <UButtonGroup>
         <UButton icon="mdi:google" @click="signInWithOAuth" />
       </UButtonGroup>

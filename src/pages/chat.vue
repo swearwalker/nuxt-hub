@@ -3,6 +3,7 @@ import type { ChatMessageInterface } from '@/types/interfaces/chat.interface'
 import ChatFooter from '@/components/chat/ChatFooter.vue'
 import ChatBubble from '@/components/chat/ChatBubble.vue'
 
+const { t } = useI18n()
 const { $socket } = useNuxtApp()
 const user = await useSupabaseUser()
 const supabase = useSupabaseClient()
@@ -62,15 +63,17 @@ watch(
     <UCard class="flex h-full w-full flex-col">
       <template #header>
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <h2 class="text-xl font-bold">Chat</h2>
-          <p v-if="user" class="text-sm text-gray-500">Logged in as {{ user.email }}</p>
+          <h2 class="text-xl font-bold">{{ t('chat.title') }}</h2>
+          <p v-if="user" class="text-sm text-gray-500">
+            {{ t('chat.current-user', { email: user.email }) }}
+          </p>
         </div>
       </template>
 
       <div
         class="chat-messages flex flex-1 flex-col items-start space-y-1 overflow-y-auto p-4"
         :class="{ 'justify-center': isLoading }"
-        style="height: calc(100vh - 14rem)"
+        style="height: calc(100vh - 14.5rem)"
       >
         <UProgress v-if="isLoading" animation="swing" />
         <template v-else-if="!isLoading && messages.length > 0">

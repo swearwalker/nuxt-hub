@@ -1,3 +1,66 @@
 {
-  "title": "Тестування"
+  "sidebar": {
+    "nav": {
+      "todo": "Завдання",
+      "chat": "Чат"
+    },
+    "theme": {
+      "dark": "Темна",
+      "light": "Світла"
+    },
+    "language": {
+      "en": "Англійська",
+      "uk": "Українська"
+    },
+    "sign-out": "Вийти"
+  },
+  "auth": {
+    "switch-label": "Тип авторизації",
+    "switch-description": "Перемкнути тип авторизації між входом та реєстрацією",
+    "sign-in": "Увійти",
+    "sign-up": "Зареєструватися",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "submit": "Підтвердити",
+    "other-way-auth": "Або увійдіть через соціальні мережі"
+  },
+  "todo": {
+    "create-btn": "Створити завдання",
+    "table": {
+      "id": "ID",
+      "title": "Назва",
+      "description": "Опис",
+      "status": {
+        "title": "Статус",
+        "complete": "Виконано",
+        "incomplete": "Не виконано"
+      },
+      "date": "Дата",
+      "actions": {
+        "title": "Дії",
+        "edit": "Редагувати",
+        "duplicate": "Дублювати",
+        "delete": "Видалити"
+      }
+    },
+    "form": {
+      "create-title": "Створити нове завдання",
+      "create-description": "Заповніть форму для створення нового завдання.",
+      "edit-title": "Редагувати завдання",
+      "edit-description": "Змініть необхідні поля для оновлення завдання.",
+      "title": "Назва",
+      "description": "Опис",
+      "status": {
+        "title": "Статус",
+        "complete": "Виконано",
+        "incomplete": "Не виконано"
+      },
+      "create-btn": "Створити",
+      "update-btn": "Оновити"
+    }
+  },
+  "chat": {
+    "title": "Чат",
+    "current-user": "Ви {email}"
+  }
 }

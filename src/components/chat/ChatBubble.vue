@@ -26,7 +26,10 @@ const isSelf = computed(() => isCurrentUser(message, user))
         :color="isSelf ? 'primary' : 'gray'"
         size="sm"
       />
-      <div class="flex-1 rounded-2xl px-4 py-2" :class="isSelf ? 'bg-zinc-900' : 'bg-zinc-800'">
+      <div
+        class="flex-1 rounded-2xl px-4 py-2"
+        :class="isSelf ? 'bg-zinc-50 dark:bg-zinc-900' : 'bg-zinc-100 dark:bg-zinc-800'"
+      >
         <span v-if="!isSelf" class="text-sm font-bold">{{
           getUserDisplayName(message, user)
         }}</span>
