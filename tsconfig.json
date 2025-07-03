@@ -7,6 +7,7 @@
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "allowJs": true,
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "strict": true,
     "paths": {

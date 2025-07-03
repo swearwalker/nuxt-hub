@@ -2,62 +2,45 @@ import type { TodoNewInterface, TodoUpdateInterface } from '@/types/interfaces/t
 
 export const todoService = {
   async fetchTodoList() {
-    const response = await fetch('/api/todo/list', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        ...useRequestHeaders(['cookie']),
-      },
-    })
+    const { $api } = useNuxtApp()
 
-    if (!response.ok) {
+    try {
+      return await $api.get('/todo/list')
+    } catch (error) {
+      console.error('Failed to fetch todo list:', error)
       throw new Error('Failed to fetch todo list')
     }
-
-    return await response.json()
   },
 
   async createTodo(todo: TodoNewInterface) {
-    const response = await fetch('/api/todo/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...useRequestHeaders(['cookie']),
-      },
-      body: JSON.stringify(todo),
-    })
+    const { $api } = useNuxtApp()
 
-    if (!response.ok) {
+    try {
+      await $api.post('/todo/create', todo)
+    } catch (error) {
+      console.error('Failed to create todo:', error)
       throw new Error('Failed to create todo')
     }
   },
 
   async updateTodo(todo: Partial<TodoUpdateInterface>) {
-    const response = await fetch('/api/todo/update', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...useRequestHeaders(['cookie']),
-      },
-      body: JSON.stringify(todo),
-    })
+    const { $api } = useNuxtApp()
 
-    if (!response.ok) {
+    try {
+      await $api.post('/todo/update', todo)
+    } catch (error) {
+      console.error('Failed to update todo:', error)
       throw new Error('Failed to update todo')
     }
   },
 
   async deleteTodo(id: number) {
-    const response = await fetch('/api/todo/delete', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...useRequestHeaders(['cookie']),
-      },
-      body: JSON.stringify({ id }),
-    })
+    const { $api } = useNuxtApp()
 
-    if (!response.ok) {
+    try {
+      await $api.post('/todo/delete', { id })
+    } catch (error) {
+      console.error('Failed to delete todo:', error)
       throw new Error('Failed to delete todo')
     }
   },
