@@ -17,7 +17,7 @@ const { items } = defineProps<{ items: TodoInterface[] }>()
 const emit = defineEmits<{
   (e: 'update:edit', payload: TodoUpdateInterface): void
   (e: 'update:complete', payload: { id: number; complete: boolean }): void
-  (e: 'update:delete', payload: { id: number }): void
+  (e: 'update:delete', payload: number): void
   (e: 'update:duplicate', payload: TodoNewInterface): void
 }>()
 
@@ -130,7 +130,7 @@ function getRowItems(row?: Row<TodoInterface>) {
       color: 'error',
       onClick: () => {
         if (row) {
-          emit('update:delete', { id: row.original.id })
+          emit('update:delete', row.original.id)
         }
       },
     },

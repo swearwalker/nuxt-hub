@@ -7,6 +7,9 @@ import type {
 } from '@/types/interfaces/todo.interface'
 import TodoEditForm from '@/components/todo/TodoEditForm.vue'
 import TodoCreateForm from '@/components/todo/TodoCreateForm.vue'
+import { useTodoStore } from '@/stores/todo/index.js'
+
+const todoStore = useTodoStore()
 
 const showCreateTodoModal = ref(false)
 const showEditTodoModal = ref(false)
@@ -22,10 +25,7 @@ const editTodoItem = (todo: TodoUpdateInterface) => {
 
 const createTodo = async (todo: TodoNewInterface) => {
   try {
-    await $fetch('/api/todo/create', {
-      method: 'POST',
-      body: todo,
-    })
+    await todoStore.createTodo(todo)
     await refresh()
     showCreateTodoModal.value = false
   } catch (e: unknown) {
@@ -36,12 +36,9 @@ const createTodo = async (todo: TodoNewInterface) => {
   }
 }
 
-const updateTodo = async (todo: TodoUpdateInterface) => {
+const updateTodo = async (todo: Partial<TodoUpdateInterface>) => {
   try {
-    await $fetch('/api/todo/update', {
-      method: 'POST',
-      body: todo,
-    })
+    await todoStore.updateTodo(todo)
     await refresh()
     showEditTodoModal.value = false
     selectedTodoItem.value = null
@@ -51,12 +48,9 @@ const updateTodo = async (todo: TodoUpdateInterface) => {
   }
 }
 
-const deleteTodoItem = async (payload: { id: number }) => {
+const deleteTodoItem = async (id: number) => {
   try {
-    await $fetch('/api/todo/delete', {
-      method: 'POST',
-      body: { id: payload.id },
-    })
+    await todoStore.deleteTodo(id)
     todoList.value = []
     await refresh()
   } catch (e: unknown) {
@@ -69,11 +63,9 @@ const toggleCreateTodoModal = () => {
   showCreateTodoModal.value = !showCreateTodoModal.value
 }
 
-const { data: todoList, refresh } = await useAsyncData<TodoInterface[]>('todoList', () =>
-  $fetch('/api/todo/list', {
-    headers: useRequestHeaders(['cookie']),
-  })
-)
+const { data: todoList, refresh } = await useAsyncData<TodoInterface[]>('todoList', async () => {
+  return todoStore.fetchTodoList()
+})
 
 watch(showCreateTodoModal, newValue => {
   if (!newValue) {
