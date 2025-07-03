@@ -3,10 +3,12 @@ import type {
   TodoInterface,
   TodoNewInterface,
   TodoUpdateInterface,
-} from '@/types/interfaces/todo.interface.js'
-import { todoService } from '@/services/todoService.js'
+} from '@/types/interfaces/todo.interface.ts'
+import { todoService } from '@/services/todoService.ts'
+import type { ApiError } from '@/types/interfaces/errors.interface.ts'
 
 export const useTodoStore = defineStore('todo', () => {
+  const toast = useToast()
   const todoList = ref<TodoInterface[]>([])
 
   const setTodoList = (list: TodoInterface[]) => {
@@ -24,32 +26,76 @@ export const useTodoStore = defineStore('todo', () => {
       setTodoList(response)
 
       return response
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(error)
+      const apiError = error as ApiError
+      toast.add({
+        title: 'Error',
+        description: Array.isArray(apiError.data?.message)
+          ? apiError.data.message.join(', ')
+          : apiError.data?.message || apiError.message || 'An error occurred',
+        color: 'error',
+      })
     }
   }
 
   const createTodo = async (todo: TodoNewInterface) => {
     try {
       await todoService.createTodo(todo)
-    } catch (error) {
+
+      toast.add({
+        title: 'New Todo Created!',
+      })
+    } catch (error: unknown) {
       console.error(error)
+      const apiError = error as ApiError
+      toast.add({
+        title: 'Error',
+        description: Array.isArray(apiError.data?.message)
+          ? apiError.data.message.join(', ')
+          : apiError.data?.message || apiError.message || 'An error occurred',
+        color: 'error',
+      })
     }
   }
 
   const updateTodo = async (todo: Partial<TodoUpdateInterface>) => {
     try {
       await todoService.updateTodo(todo)
-    } catch (error) {
+
+      toast.add({
+        title: 'Todo Updated!',
+      })
+    } catch (error: unknown) {
       console.error(error)
+      const apiError = error as ApiError
+      toast.add({
+        title: 'Error',
+        description: Array.isArray(apiError.data?.message)
+          ? apiError.data.message.join(', ')
+          : apiError.data?.message || apiError.message || 'An error occurred',
+        color: 'error',
+      })
     }
   }
 
   const deleteTodo = async (id: number) => {
     try {
       await todoService.deleteTodo(id)
-    } catch (error) {
+
+      toast.add({
+        title: 'Todo Deleted!',
+      })
+    } catch (error: unknown) {
       console.error(error)
+      const apiError = error as ApiError
+      toast.add({
+        title: 'Error',
+        description: Array.isArray(apiError.data?.message)
+          ? apiError.data.message.join(', ')
+          : apiError.data?.message || apiError.message || 'An error occurred',
+        color: 'error',
+      })
     }
   }
 

@@ -7,6 +7,11 @@ export default defineNuxtConfig({
     '@': '~/',
   },
   css: ['./src/assets/css/main.css', './src/assets/css/animations.css'],
+  runtimeConfig: {
+    public: {
+      baseApi: process.env.NUXT_PUBLIC_BASE_API,
+    },
+  },
 
   modules: [
     '@nuxt/eslint',
