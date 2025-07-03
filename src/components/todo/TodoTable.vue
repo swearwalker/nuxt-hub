@@ -9,6 +9,8 @@ import type {
 import type { Row } from '@tanstack/table-core'
 import { format } from 'date-fns'
 
+const { t } = useI18n()
+
 const UButton = resolveComponent('UButton')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
@@ -24,27 +26,27 @@ const emit = defineEmits<{
 const columns: TableColumn<TodoInterface>[] = [
   {
     accessorKey: 'id',
-    header: 'ID',
+    header: t('todo.table.id'),
     cell: ({ row }) => `#${row.getValue('id')}`,
   },
   {
     accessorKey: 'created_at',
-    header: 'Date',
+    header: t('todo.table.date'),
     cell: ({ row }) => {
       return format(row.getValue('created_at'), 'dd MMM yyyy')
     },
   },
   {
     accessorKey: 'title',
-    header: 'Title',
+    header: t('todo.table.title'),
   },
   {
     accessorKey: 'description',
-    header: 'Description',
+    header: t('todo.table.description'),
   },
   {
     accessorKey: 'complete',
-    header: 'Status',
+    header: t('todo.table.status.title'),
     cell: ({ row }) => {
       const isComplete = row.getValue('complete')
       return h(resolveComponent('USwitch'), {
@@ -53,7 +55,7 @@ const columns: TableColumn<TodoInterface>[] = [
           emit('update:complete', { id: row.original.id, complete: val })
         },
         class: 'align-middle',
-        label: isComplete ? 'Complete' : 'Incomplete',
+        label: isComplete ? t('todo.table.status.complete') : t('todo.table.status.incomplete'),
       })
     },
   },
@@ -90,13 +92,13 @@ function getRowItems(row?: Row<TodoInterface>) {
   return [
     {
       type: 'label',
-      label: 'Actions',
+      label: t('todo.table.actions.title'),
     },
     {
       type: 'separator',
     },
     {
-      label: 'Edit',
+      label: t('todo.table.actions.edit'),
       icon: 'i-lucide-edit-2',
       color: 'primary',
       onClick: () => {
@@ -111,7 +113,7 @@ function getRowItems(row?: Row<TodoInterface>) {
       },
     },
     {
-      label: 'Duplicate',
+      label: t('todo.table.actions.duplicate'),
       icon: 'i-lucide-copy',
       color: 'info',
       onClick: () => {
@@ -125,7 +127,7 @@ function getRowItems(row?: Row<TodoInterface>) {
       },
     },
     {
-      label: 'Delete',
+      label: t('todo.table.actions.delete'),
       icon: 'i-lucide-trash-2',
       color: 'error',
       onClick: () => {

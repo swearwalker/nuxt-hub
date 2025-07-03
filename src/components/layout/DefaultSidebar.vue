@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '#ui/components/NavigationMenu.vue'
+import type { NavigationMenuItem } from '@nuxt/ui'
+import ThemeSwitcher from '@/components/layout/ThemeSwitcher.vue'
+import LangSwitcher from '@/components/layout/LangSwitcher.vue'
 
+const { t } = useI18n()
 const user = useSupabaseUser()
 
 const signOut = async () => {
@@ -18,7 +21,6 @@ const items = ref<NavigationMenuItem[][]>([
         size: 'lg',
       },
       label: user.value?.user_metadata.full_name,
-      to: '/profile',
       tooltip: {
         text: user.value?.email,
       },
@@ -26,12 +28,12 @@ const items = ref<NavigationMenuItem[][]>([
   ],
   [
     {
-      label: 'Todo',
+      label: t('sidebar.nav.todo'),
       icon: 'lucide:list-todo',
       to: '/todo',
     },
     {
-      label: 'Chat',
+      label: t('sidebar.nav.chat'),
       icon: 'lucide:message-square',
       to: '/chat',
     },
@@ -47,15 +49,11 @@ const items = ref<NavigationMenuItem[][]>([
       :items="items"
       class="data-[orientation=vertical]:w-48"
     />
-    <UButton
-      icon="lucide:log-out"
-      color="error"
-      variant="soft"
-      size="lg"
-      class="mt-auto"
-      @click="signOut"
-      >Sign out</UButton
-    >
+    <ThemeSwitcher class="mt-auto" />
+    <LangSwitcher />
+    <UButton icon="lucide:log-out" color="error" variant="soft" size="lg" @click="signOut">{{
+      t('sidebar.sign-out')
+    }}</UButton>
   </aside>
 </template>
 

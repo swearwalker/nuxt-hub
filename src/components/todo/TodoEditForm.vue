@@ -7,6 +7,8 @@ const props = defineProps<{
   todoItem: TodoUpdateInterface
 }>()
 
+const { t } = useI18n()
+
 const emit = defineEmits<{
   (e: 'update', todo: Partial<TodoUpdateInterface>): void
 }>()
@@ -70,20 +72,17 @@ const submitForm = async () => {
 
 <template>
   <UForm :schema="schema" :state="state" class="flex flex-col gap-4" @submit="submitForm">
-    <UFormField label="Title" name="title" required>
-      <UInput v-model="state.title" placeholder="Enter todo title" class="w-full" />
+    <UFormField :label="t('todo.form.title')" name="title" required>
+      <UInput v-model="state.title" class="w-full" />
     </UFormField>
-    <UFormField label="Description" name="description">
-      <UTextarea
-        v-model="state.description"
-        placeholder="Enter todo description"
-        maxlength="500"
-        resize="none"
-        class="w-full"
+    <UFormField :label="t('todo.form.description')" name="description">
+      <UTextarea v-model="state.description" maxlength="500" resize="none" class="w-full" />
+    </UFormField>
+    <UFormField :label="t('todo.form.status.title')" name="complete">
+      <USwitch
+        v-model="state.complete"
+        :label="state.complete ? t('todo.form.status.complete') : t('todo.form.status.incomplete')"
       />
-    </UFormField>
-    <UFormField label="Complete" name="complete">
-      <USwitch v-model="state.complete" :label="state.complete ? 'Complete' : 'Incomplete'" />
     </UFormField>
     <UButton
       class="self-end"
@@ -92,7 +91,7 @@ const submitForm = async () => {
       :disabled="!isValid"
       @click.prevent="submitForm"
     >
-      Update Todo
+      {{ t('todo.form.update-btn') }}
     </UButton>
     <UAlert v-if="formError" type="error">{{ formError }}</UAlert>
   </UForm>

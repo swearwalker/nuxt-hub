@@ -9,6 +9,7 @@ import TodoEditForm from '@/components/todo/TodoEditForm.vue'
 import TodoCreateForm from '@/components/todo/TodoCreateForm.vue'
 import { useTodoStore } from '@/stores/todo/index.js'
 
+const { t } = useI18n()
 const todoStore = useTodoStore()
 
 const showCreateTodoModal = ref(false)
@@ -83,9 +84,9 @@ watch(showEditTodoModal, newValue => {
 <template>
   <UContainer>
     <div class="mb-4 flex w-full">
-      <UButton class="ml-auto" icon="i-lucide-plus" @click="toggleCreateTodoModal"
-        >Create Todo</UButton
-      >
+      <UButton class="ml-auto" icon="i-lucide-plus" @click="toggleCreateTodoModal">{{
+        t('todo.create-btn')
+      }}</UButton>
     </div>
     <TodoTable
       :items="todoList || []"
@@ -96,8 +97,8 @@ watch(showEditTodoModal, newValue => {
     />
     <UModal
       v-model:open="showCreateTodoModal"
-      title="Create Todo"
-      description="Fill out the form to create a new todo item."
+      :title="t('todo.form.create-title')"
+      :description="t('todo.form.create-description')"
     >
       <template #body>
         <TodoCreateForm @create="createTodo" />
@@ -105,8 +106,8 @@ watch(showEditTodoModal, newValue => {
     </UModal>
     <UModal
       v-model:open="showEditTodoModal"
-      title="Edit Todo"
-      description="Update the todo item details"
+      :title="t('todo.form.edit-title')"
+      :description="t('todo.form.edit-description')"
     >
       <template #body>
         <TodoEditForm v-if="selectedTodoItem" :todo-item="selectedTodoItem" @update="updateTodo" />

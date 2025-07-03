@@ -1,3 +1,66 @@
 {
-  "title": "Testing"
+  "sidebar": {
+    "nav": {
+      "todo": "Todo",
+      "chat": "Chat"
+    },
+    "theme": {
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "language": {
+      "en": "English",
+      "uk": "Ukrainian"
+    },
+    "sign-out": "Sign Out"
+  },
+  "auth": {
+    "switch-label": "Auth type",
+    "switch-description": "Switch auth type between sign-in and sign-up",
+    "sign-in": "Sign In",
+    "sign-up": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Submit",
+    "other-way-auth": "Or sign in using social networks"
+  },
+  "todo": {
+    "create-btn": "Create Todo",
+    "table": {
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "status": {
+        "title": "Status",
+        "complete": "Complete",
+        "incomplete": "Incomplete"
+      },
+      "date": "Date",
+      "actions": {
+        "title": "Actions",
+        "edit": "Edit",
+        "duplicate": "Duplicate",
+        "delete": "Delete"
+      }
+    },
+    "form": {
+      "create-title": "Create New Todo",
+      "create-description": "Fill out the form to create a new todo item.",
+      "edit-title": "Edit Todo",
+      "edit-description": "Change needed fields to update todo item.",
+      "title": "Title",
+      "description": "Description",
+      "status": {
+        "title": "Status",
+        "complete": "Complete",
+        "incomplete": "Incomplete"
+      },
+      "create-btn": "Create",
+      "update-btn": "Update"
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "current-user": "You {email}"
+  }
 }
