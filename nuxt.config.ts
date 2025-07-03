@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/i18n',
     '@nuxtjs/supabase',
+    '@pinia/nuxt',
   ],
 
   i18n: {
