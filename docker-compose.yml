@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NUXT_PUBLIC_SOCKET_URL=${NUXT_PUBLIC_SOCKET_URL}
+      - NUXT_PUBLIC_SUPABASE_URL=${NUXT_PUBLIC_SUPABASE_URL}
+      - NUXT_PUBLIC_SUPABASE_KEY=${NUXT_PUBLIC_SUPABASE_KEY}
+    volumes:
+      - ./src:/app/src
+      - ./.nuxt:/app/.nuxt
+    depends_on:
+      - socket
+
+  socket:
+    build:
+      context: .
+      dockerfile: Dockerfile.socket
+    ports:
+      - "3001:3001"
+    environment:
+      - NUXT_PUBLIC_SUPABASE_URL=${NUXT_PUBLIC_SUPABASE_URL}
+      - NUXT_SUPABASE_SERVICE_ROLE_KEY=${NUXT_SUPABASE_SERVICE_ROLE_KEY}
+      - CORS_ORIGIN=${CORS_ORIGIN}
+    volumes:
+      - ./src:/app/src
