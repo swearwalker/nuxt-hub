@@ -30,6 +30,8 @@
 
 ## Getting Started
 
+### Option 1: Standard Setup
+
 1. **Install dependencies:**
    ```bash
    npm install
@@ -45,6 +47,30 @@
 4. **Build for production:**
    ```bash
    npm run build
+   ```
+
+### Option 2: Docker Compose
+
+1. **Create a .env file:**
+   ```bash
+   cp .env.example .env
+   ```
+   Then edit the .env file to add your actual environment variables.
+
+2. **Start the application with Docker Compose:**
+   ```bash
+   docker-compose up
+   ```
+   This will start both the Nuxt application and the Socket.io server.
+
+3. **Build and start in detached mode:**
+   ```bash
+   docker-compose up --build -d
+   ```
+
+4. **Stop the application:**
+   ```bash
+   docker-compose down
    ```
 
 ## Project Structure
