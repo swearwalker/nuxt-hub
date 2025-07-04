@@ -168,7 +168,10 @@ The application includes a real-time chat system with Supabase integration:
 
 ### Composables
 
-- **useUserDisplay**: Manages user name formatting, avatar generation, and message timestamps
+- **useUserDisplay**: Manages user name formatting, avatar generation, and message timestamps with localization support
+  - Formats dates according to the user's selected language (English or Ukrainian)
+  - Integrates with i18n to detect current locale
+  - Uses date-fns/locale for proper date localization
 - **useChatMessages**: Handles message fetching, real-time subscriptions, and message sending
 
 ### Implementation
