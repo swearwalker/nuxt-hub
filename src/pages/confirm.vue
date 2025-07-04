@@ -13,7 +13,7 @@ watch(
   () => {
     if (user.value) {
       useCookie(`${cookieName}-redirect-path`).value = null
-      return navigateTo(redirectPath || '/dashboard')
+      return navigateTo(redirectPath || '/chat')
     }
   },
   { immediate: true }

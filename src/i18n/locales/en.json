@@ -22,7 +22,16 @@
     "email": "Email",
     "password": "Password",
     "submit": "Submit",
-    "other-way-auth": "Or sign in using social networks"
+    "other-way-auth": "Or sign in using social networks",
+    "errors": {
+      "email": "Invalid Email",
+      "password": "At least 8 characters"
+    },
+    "toasts": {
+      "sign-in-success": "Successfully signed in",
+      "sign-up-success": "Successfully signed up",
+      "success": "Success"
+    }
   },
   "todo": {
     "create-btn": "Create Todo",
@@ -56,7 +65,21 @@
         "incomplete": "Incomplete"
       },
       "create-btn": "Create",
-      "update-btn": "Update"
+      "update-btn": "Update",
+      "errors": {
+        "title": "Title required"
+      }
+    },
+    "success": {
+      "create": "Successfully created",
+      "update": "Successfully updated",
+      "delete": "Successfully deleted"
+    },
+    "errors": {
+      "fetch": "Error while fetching",
+      "create": "Error while creating",
+      "update": "Error while updating",
+      "delete": "Error while deleting"
     }
   },
   "chat": {

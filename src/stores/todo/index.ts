@@ -8,6 +8,7 @@ import { todoService } from '@/services/todoService.ts'
 import type { ApiError } from '@/types/interfaces/errors.interface.ts'
 
 export const useTodoStore = defineStore('todo', () => {
+  const { t } = useI18n()
   const toast = useToast()
   const todoList = ref<TodoInterface[]>([])
 
@@ -30,7 +31,7 @@ export const useTodoStore = defineStore('todo', () => {
       console.error(error)
       const apiError = error as ApiError
       toast.add({
-        title: 'Error',
+        title: t('todo.errors.fetch'),
         description: Array.isArray(apiError.data?.message)
           ? apiError.data.message.join(', ')
           : apiError.data?.message || apiError.message || 'An error occurred',
@@ -44,13 +45,14 @@ export const useTodoStore = defineStore('todo', () => {
       await todoService.createTodo(todo)
 
       toast.add({
-        title: 'New Todo Created!',
+        title: t('todo.success.create'),
+        color: 'success',
       })
     } catch (error: unknown) {
       console.error(error)
       const apiError = error as ApiError
       toast.add({
-        title: 'Error',
+        title: t('todo.errors.create'),
         description: Array.isArray(apiError.data?.message)
           ? apiError.data.message.join(', ')
           : apiError.data?.message || apiError.message || 'An error occurred',
@@ -64,13 +66,14 @@ export const useTodoStore = defineStore('todo', () => {
       await todoService.updateTodo(todo)
 
       toast.add({
-        title: 'Todo Updated!',
+        title: t('todo.success.update'),
+        color: 'success',
       })
     } catch (error: unknown) {
       console.error(error)
       const apiError = error as ApiError
       toast.add({
-        title: 'Error',
+        title: t('todo.errors.update'),
         description: Array.isArray(apiError.data?.message)
           ? apiError.data.message.join(', ')
           : apiError.data?.message || apiError.message || 'An error occurred',
@@ -84,13 +87,14 @@ export const useTodoStore = defineStore('todo', () => {
       await todoService.deleteTodo(id)
 
       toast.add({
-        title: 'Todo Deleted!',
+        title: t('todo.success.delete'),
+        color: 'success',
       })
     } catch (error: unknown) {
       console.error(error)
       const apiError = error as ApiError
       toast.add({
-        title: 'Error',
+        title: t('todo.errors.delete'),
         description: Array.isArray(apiError.data?.message)
           ? apiError.data.message.join(', ')
           : apiError.data?.message || apiError.message || 'An error occurred',
