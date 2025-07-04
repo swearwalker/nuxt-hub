@@ -28,6 +28,14 @@ const signIn = async (email: string, password: string) => {
     password,
   })
   if (error) displayError(error)
+  else {
+    toast.add({
+      title: t('auth.toasts.sign-in-success'),
+      icon: 'i-lucide-check-circle',
+      color: 'success',
+    })
+    await signIn(email, password)
+  }
 }
 
 const signUp = async (email: string, password: string) => {
@@ -38,7 +46,7 @@ const signUp = async (email: string, password: string) => {
   if (error) displayError(error)
   else {
     toast.add({
-      title: 'Sign up successful',
+      title: t('auth.toasts.sign-up-success'),
       icon: 'i-lucide-check-circle',
       color: 'success',
     })
@@ -56,8 +64,8 @@ const displayError = ({ message }: { message: string }) => {
 }
 
 const schema = z.object({
-  email: z.string().email('Invalid email'),
-  password: z.string().min(8, 'Must be at least 8 characters'),
+  email: z.string().email(t('auth.errors.email')),
+  password: z.string().min(8, t('auth.errors.password')),
 })
 
 type Schema = z.output<typeof schema>
@@ -70,7 +78,7 @@ const state = reactive<Partial<Schema>>({
 const toast = useToast()
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   const { email, password } = event.data
-  toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
+  toast.add({ title: t('auth.toasts.success'), color: 'success' })
   console.log(event.data)
 
   if (isNewUser.value) await signIn(email, password)

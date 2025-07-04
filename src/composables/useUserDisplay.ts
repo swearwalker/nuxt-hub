@@ -1,4 +1,5 @@
-import { format } from 'date-fns'
+import { format, type Locale } from 'date-fns'
+import { enUS, uk } from 'date-fns/locale'
 import type { ChatMessageInterface } from '@/types/interfaces/chat.interface.ts'
 import type { UserInterface } from '@/types/interfaces/user.interface.ts'
 
@@ -61,14 +62,25 @@ export function useUserDisplay() {
 
   const formatMessageTime = (timestamp: string, formatStr = 'dd MMM, HH:mm') => {
     try {
+      type SupportedLocales = 'en' | 'uk'
+
+      const { locale: currentLocale } = useI18n()
+
+      const localeMap: Record<SupportedLocales, Locale> = {
+        en: enUS,
+        uk: uk,
+      }
+
+      const dateLocale = localeMap[currentLocale.value as SupportedLocales] || uk
+
       const date = new Date(timestamp)
       const today = new Date()
 
       if (date.toDateString() === today.toDateString()) {
-        return format(date, 'HH:mm')
+        return format(date, 'HH:mm', { locale: dateLocale })
       }
 
-      return format(date, formatStr)
+      return format(date, formatStr, { locale: dateLocale })
     } catch (e) {
       console.error('Error formatting date:', e)
       return timestamp
