@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const { t } = useI18n()
+navigateTo('/chat')
 </script>
 
 <template>
   <UContainer>
-    <h1>Hi Index! {{ t('title') }}</h1>
+    <h1>Hi Index!</h1>
   </UContainer>
 </template>
 
